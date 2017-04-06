@@ -3,5 +3,8 @@
 import PackageDescription
 
 let package = Package(
-    name: "List"
+    name: "List",
+	targets: [
+		Target(name: "List", dependencies: ["liblist"])
+	]
 )

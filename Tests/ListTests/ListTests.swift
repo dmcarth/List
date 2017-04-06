@@ -3,9 +3,12 @@ import XCTest
 
 class ListTests: XCTestCase {
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        XCTAssertEqual(List().text, "Hello, World!")
+       measure {
+			let li = List<Int>()
+			for i in 0..<500000 {
+				li.append(i)
+			}
+		}
     }
 
 
