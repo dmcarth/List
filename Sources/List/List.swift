@@ -3,7 +3,7 @@ import liblist
 
 public class List<T> {
 	
-	internal var list: UnsafeMutablePointer<llist>
+	fileprivate var list: UnsafeMutablePointer<llist>
 	
 	public init() {
 		list = new_empty_list()
@@ -62,9 +62,9 @@ public class List<T> {
 		return getValueFromNode(node)
 	}
 	
-	internal func getValueFromNode(_ node: UnsafeMutablePointer<llnode>) -> T {
+	fileprivate func getValueFromNode(_ node: UnsafeMutablePointer<llnode>) -> T {
 		guard let raw = node.pointee.data else {
-			fatalError("no value found")
+			fatalError("Error dereferencing node value of node: \(node.pointee)")
 		}
 		let opq = OpaquePointer(raw)
 		let ptr = UnsafeMutablePointer<T>(opq)
