@@ -5,24 +5,8 @@ public class List<T> {
 	
 	internal var list: UnsafeMutablePointer<llist>
 	
-	public var first: T? {
-		guard let firstNode = list_first_node(list) else {
-			return nil
-		}
-		
-		return getValueFromNode(firstNode)
-	}
-	
-	public var last: T? {
-		guard let lastNode = list_last_node(list) else {
-			return nil
-		}
-		
-		return getValueFromNode(lastNode)
-	}
-	
 	public init() {
-		list = new_list()
+		list = new_empty_list()
 	}
 	
 	public convenience init<S: Sequence>(_ sequence: S) where S.Iterator.Element == T {
@@ -86,6 +70,34 @@ public class List<T> {
 		let ptr = UnsafeMutablePointer<T>(opq)
 		
 		return ptr.pointee
+	}
+	
+}
+
+extension List {
+	
+	public var first: T? {
+		guard let firstNode = list_first_node(list) else {
+			return nil
+		}
+		
+		return getValueFromNode(firstNode)
+	}
+	
+	public var last: T? {
+		guard let lastNode = list_last_node(list) else {
+			return nil
+		}
+		
+		return getValueFromNode(lastNode)
+	}
+	
+	public var count: Int {
+		return list.pointee.count
+	}
+	
+	public var isEmpty: Bool {
+		return list.pointee.count == 0
 	}
 	
 }
