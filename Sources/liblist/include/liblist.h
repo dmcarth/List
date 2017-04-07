@@ -1,6 +1,5 @@
 
 #include <stdlib.h>
-#include <stdio.h>
 
 struct llnode {
 	void *data;
@@ -34,26 +33,6 @@ llist *new_empty_list() {
 	return li;
 }
 
-llnode *list_first_node(llist *list) {
-	llnode *node = list->head->next;
-	
-	if (node != list->head) {
-		return node;
-	}
-	
-	return NULL;
-}
-
-llnode *list_last_node(llist *list) {
-	llnode *node = list->head->prev;
-	
-	if (node != list->head) {
-		return node;
-	}
-	
-	return NULL;
-}
-
 void list_prepend_node(llist *list, llnode *node);
 
 void list_append_node(llist *list, llnode *node);
@@ -80,6 +59,14 @@ llnode *list_prev_node_before_node(llist *list, llnode *node) {
 	}
 	
 	return prev;
+}
+
+llnode *list_first_node(llist *list) {
+	return list_next_node_after_node(list, list->head);
+}
+
+llnode *list_last_node(llist *list) {
+	return list_prev_node_before_node(list, list->head);
 }
 
 void list_iterate_forward(llist *list, void (*callback)(llnode*)) {
