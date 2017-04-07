@@ -12,7 +12,7 @@ typedef struct llnode llnode;
 
 typedef struct {
 	struct llnode *head;
-	int count;
+	size_t count;
 } llist;
 
 llnode *node_with_value(void *value){
@@ -23,7 +23,7 @@ llnode *node_with_value(void *value){
 	return node;
 }
 
-llist *new_list() {
+llist *new_empty_list() {
 	llnode *head = node_with_value(NULL);
 	head->prev = head;
 	head->next = head;
